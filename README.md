@@ -1,3 +1,3 @@
 # Assignment2
 
-This is a code
+This is a
