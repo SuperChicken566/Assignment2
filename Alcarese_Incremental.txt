@@ -1,0 +1,12 @@
+Incremental Method
+
+##Initial Version
+In the intial version of the program I would create the base class without the student, instructor, or admin. This first version would be created
+to ensure that the users are created corectly and that the informtion can be accessed  properly. 
+
+##Intermediate versions 
+These versions would be dedicated to creating the subclasses and corresponding functions and ensuring that they are working properly. We ass time
+goes on we will add more functions and informaton for each role. Bug testing will occur throughout the project. 
+
+##Final Version 
+Final version will include all functions, information and accompanying database with information. 

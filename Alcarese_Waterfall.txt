@@ -1,0 +1,21 @@
+Waterfall Method
+
+##Requirements and Definitions
+1-2 weeks
+This project is to create a database of users that are assigned roles of Admin, Instructor, and Student. Each role will have different permissions and will have access to different functions than the other roles. Admins for example will be able to create courses, assign professors to those courses and look at User information. Instructors will be able to view their schedules and assign grades and update students GPA but will lack the functionality that admins have. Students will be able to view their GPA and regiser for courses. They wont be able to access anyone elses but their own IDs.
+
+##System and Software Design 
+Full Durration 
+Python will be used for the driving code and the database code will most likely be SQL-based. The program will start by initializing the users in the database and then a user will "sign in" gaining access to their profile and corresponding role. 
+
+##Implimentation and Unit Testing
+2-3 weeks
+For each unit we have to ensure that each Role functions properly. So every function must be tested role-by-role to ensure that functions not accessible to other roles arent being called upon. We will probably do this by manually creating instances of each role in the python code so that dependancy on the SQL databse isnt required. 
+
+##Integration and System Testing
+2 weeks 
+Combining the database and driving code are the only two things we need to test. We will do this by creating users in the databse and making calling functions based on those users. 
+
+##Operation and Maintenence
+1 week up to submission
+Honestly, after submission there isnt much maintenece needed since the code will be run off a local SQL database meaning that server access isnt needed. 

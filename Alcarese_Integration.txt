@@ -1,0 +1,26 @@
+Integration and Configuration Method
+
+##Requirement and Specification
+Requirements are that we need a code that can access an SQL-based database to allow a user to run functions and access information from that 
+database within their confidentiality limits. Admins, Instructors and students will all have different roled and different levels of accessiblity
+on the system. 
+
+##Component Analysis
+Taken from this: https://github.com/Ri2parna/Course-Registration-System
+This seems to be a PHP and Css program that is very close to what we need to accomplish. I like the inclusion of the User/Pass system that the
+Admin or Instructor needs to provide. Maybe we could add a function to the admin class that sets the password for the Student that they would use
+to logon. 
+
+##Required Modificaiton
+The elephant in the room is that we want to use Python and SQL so we would have to essentially start from scratch but having access to code that
+is already completed could make development of our code easier.
+
+##System design with Reuse
+This is almost non-applicable since the codes are writen in different languages. Function should be simlar though well just have to go about it
+in a different way. 
+
+##Development and Integration 
+Using the provided code architecture as our foundation, creating classses, variables and driving code should not rewuire much work. 
+
+##System Validation
+Validation would come by ensureing that all roles and their respective functions are working properly. 
