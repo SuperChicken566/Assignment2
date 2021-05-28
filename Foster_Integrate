@@ -1,0 +1,26 @@
+integrate and configure
+
+Requirements Specification:
+The goal is to create a scheduling system which will allow students, faculty, and admin to 
+complete certain functions as outlined by each class. The systems will require a database of
+users that will work for 100 students, 10 instructors, and 1 admin. In addition, it will 
+also contain a database of courses, and three types of users. 
+
+Component Analysis:
+ Upon researching, there is an existing student registration system on GitHub. This 
+ system includes a student and admin log in, as well as functions specific to each
+ class. This system also uses commands to query the SQL database. 
+
+Requirements Modifications:
+This existing sytems is written in CSS, making it unusable in this context. However, 
+it would be nice to have as a reference.
+
+ System Design:
+ This system is written using CSS, which would not be applicable to our python-centric
+ system. This would have to be addressed, as well as adding an instructor class with its
+ appropriate attribues and functions. Additionally, the existing student and admin classes
+ would need additional information to meet our system requirements.
+
+Development and Integration:
+Since this existing code would be used more for reference than direct implementation,
+there would not be much integration required. 
