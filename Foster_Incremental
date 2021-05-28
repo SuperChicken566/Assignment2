@@ -1,0 +1,37 @@
+incrementing process model 
+
+Outline Description: 
+The goal is to create a scheduling system which will allow students, faculty, and admin to 
+complete certain functions as outlined by each class. The systems will require a database of
+users that will work for 100 students, 10 instructors, and 1 admin. In addition, it will 
+also contain a database of courses, and three types of users. 
+
+First Iteration: 
+The first iteration of the system will include the base class of users, with attributes:
+first name, last name, and identification number. In addition, this would also include
+set and get functions for each attribute and a function to print all information for the object.
+
+Second Iteration:
+The second iteration of the system could expand on the first by introducing a new derrived 
+class. For example, the student class could be introduced. This would include all new 
+attributes for students, as well as the associated functions. These would include search
+functions, add and drop courses, and printing their schedule. 
+
+Third Iteration:
+The third iteration of the system could also expand on the second by introducing the 
+instructor class. Similarly with the student class, this would incldue new attributes, as
+well as new associated functions. These functions would allow the instructor to print
+their schedule, their class lists, and search for courses. 
+
+Fourth Iteration:
+The fourth iteration of the system would again expand on the previous. This iteration could
+include the admin class with all of its attribues and asscociated functions. These would
+include allowing them to add and remove courses from the system, add and remove users,
+as well as adding and removing students from courses, and searching and printing rosters
+and courses. 
+
+Fifth Iteration:
+The fifth iteration of the system could then include the database integration. These
+databases include the database of users which would include 100 students, 10 instructors, 
+and 1 admin. Additionally, there will be a database of courses which will contain information
+such as the CRN, course name, times, and instructor. 
