@@ -1,5 +1,7 @@
 Incremental Method
 
+(Could include more in depth analysis of iterations/more iterations)
+
 ##Initial Version
 In the intial version of the program I would create the base class without the student, instructor, or admin. This first version would be created
 to ensure that the users are created corectly and that the informtion can be accessed  properly. 
