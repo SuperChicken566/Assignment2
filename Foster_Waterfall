@@ -1,0 +1,34 @@
+waterfall process model 
+
+Requirements Definition:
+The goal is to create a scheduling system which will allow students, faculty, and admin to 
+complete certain functions as outlined by each class. The systems will require a database of
+users that will work for 100 students, 10 instructors, and 1 admin. In addition, it will 
+also contain a database of courses, and three types of users. 
+
+System and Software Design: 
+The system will consist of several databases, one with stored users, and one with stored
+courses. The three types of users will be students, instructors, and admin, all derrived 
+classes from the base class "user". The student class may register, see available courses,
+as well as their own schedule. The instructor class may see all available courses, 
+as well as their own schedules. The admin class may see everything, and edit courses, users,
+and schedules. The system will also include multiple semestersm, print outs, and scheduling 
+preferences. The basic attribues for all classes include a first name, last name, and 
+identification number. Derrived classes may include addition attributes. Each class will
+have functions specific to that class that will allow the user to navigate the system. 
+
+Implementation and Unit Testing: 
+For this system, the primary language used will be python with the database in SQL lite. 
+For testing, multiple test cases will be used. This includes navigating as multilpe user
+types, and selecting various functions to carry out the requirements. 
+
+Integration and System Testing:
+The database code will need to be integrated into the main system code. The same testing
+procedure will be used for the full system, as multiple test cases will be required to 
+ensure the fullfullment of the system requirements.
+
+Operation and Maintenance:
+Once the system is written and tested, there will be maintenance required to ensure
+that the system continues to run as intended. 
+
+
