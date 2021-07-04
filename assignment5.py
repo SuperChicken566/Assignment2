@@ -66,7 +66,7 @@ class admin_c(user_c):
         print("Admin Created")
         
 def main():
-    #marc - addded collums to the student table. 
+    #marc - addded collums to the student table. not needed after running once
     #cursor.execute("""ALTER TABLE STUDENT ADD CRN1 INTEGER NULL;""")
     #cursor.execute("""ALTER TABLE STUDENT ADD CRN2 INTEGER NULL;""")
     #cursor.execute("""ALTER TABLE STUDENT ADD CRN3 INTEGER NULL;""")
@@ -77,10 +77,10 @@ def main():
     students = {}
     instructors = {}
     admins = {}
-    inputUser = ""
+    #collective contributions from marc and kloe
+    inputUser = input("Are you logging in as a student, instuctor, or admin?\n")
     while True:
-        inputUser = input("Are you logging in as a student, instuctor, or admin?\n")
-        inputEmail = input("Please enter an email:")
+        inputEmail = input("Please enter an email: ")
         cursor.execute("""SELECT * FROM '%s' WHERE EMAIL = '%s';""" % (inputUser, inputEmail))
         result = cursor.fetchall()
         if len(result) == 0:
@@ -88,7 +88,7 @@ def main():
             continue
         cursor.execute("""SELECT ID FROM '%s' WHERE EMAIL = '%s';""" % (inputUser, inputEmail))
         result = [int(record[0]) for record in cursor.fetchall()]
-        inputPass = int(input("Please enter your ID number:"))
+        inputPass = int(input("Please enter your ID number: "))
         if result[0] == inputPass:
             print("login valid")
             break
@@ -122,13 +122,13 @@ def main():
                 cursor.execute("""DELETE FROM COURSES WHERE CRN = '%i';""" % (CRN))
                 break
         elif choice == 3:#marc created in addition to courses in course table 
-            inID = int(input("Enter Student ID"))
-            CRN1 = int(input("Enter CRN1"))
-            CRN2 = int(input("Enter CRN2"))
-            CRN3 = int(input("Enter CRN3"))
-            CRN4 = int(input("Enter CRN4"))
-            CRN5 = int(input("Enter CRN5"))
-            cursor.execute("""UPDATE STUDENT WHERE ID = '%i' SET CRN1 = '%i', CRN2 = '%i', CRN3 = '%i', CRN4 = '%i', CRN5 = '%i';""" % (inID,CRN1,CRN2,CRN3,CRN4,CRN5))
+            inID = int(input("Enter Student ID: "))
+            CRN1 = int(input("Enter CRN1: "))
+            CRN2 = int(input("Enter CRN2: "))
+            CRN3 = int(input("Enter CRN3: "))
+            CRN4 = int(input("Enter CRN4: "))
+            CRN5 = int(input("Enter CRN5: "))
+            cursor.execute("""UPDATE STUDENT SET CRN1 = '%i', CRN2 = '%i', CRN3 = '%i', CRN4 = '%i', CRN5 = '%i' WHERE ID = '%i';""" % (CRN1,CRN2,CRN3,CRN4,CRN5,inID))
 
         elif choice == 4: #kloe added search by parameters
             selection = int(input("\nHow would you like to search?\n1: By CRN\n2: By CRN and Department\n"))
@@ -151,14 +151,11 @@ def main():
                 break
             break
         elif choice == 5: #kloe added print roster function 
-            selection = int(input("\nPress 1 to select roster would you like to print:\n"))
-            if selection == 1:
-                CRNin = int(input("Enter CRN of course roster you would like to print: "))
-                cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN1 = '%i' OR CRN2 = '%i' OR CRN3 = 'i' OR CRN4 = '%i' OR CRN5 = '%i'; """ % (CRNin,CRNin,CRNin,CRNin,CRNin))
-                query_result = cursor.fetchall()
-
-                for i in query_result:
-                    print(i)
+            CRNin = int(input("Enter CRN of course roster you would like to print: "))
+            cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN1 = '%i' ; """ % (CRNin))
+            query_result = cursor.fetchall()
+            for i in query_result:
+                print(i)
 
         elif choice == 0:
             print("Exit Program")
