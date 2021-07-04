@@ -99,7 +99,7 @@ def main():
     choice = 1
     while choice != 0:
     #kloe - edited/updated menu
-        choice = int(input("\nSelect your choice:\n1: Add Course to System\n2: Remove Course from System\n3: Update Courses\n4: Search Courses\n5: Print Roster\n6: Remove Course from Semester Schedule\n0: Exit Program\n"))
+        choice = int(input("\nSelect your choice:\n1: Add Course to System\n2: Remove Course from System\n3: Update Courses\n4: Search Courses\n5: Print Roster\n0: Exit Program\n"))
         selection = 1
         if choice == 1: #marc added from previous code, kloe updated 
             selection = int(input("\nPress 1 to enter the information for the course you want to add:\n"))
@@ -176,12 +176,6 @@ def main():
         elif choice == 0:
             print("Exit Program")
             break
-            
-            #kloe and marc created new choice
-        elif choice == 6:
-            selection = int(input("\nWhich course would you like to remove?\n"))
-            if selection == 1:
-                break 
 
 if __name__=="__main__":
     main()
