@@ -1,3 +1,5 @@
+#code based off of marc's code for assignment 3. Kloe did most of the function editing and Marc did most of the database manipulation. changes will be marked individually below. 
+
 import sqlite3
 
 database = sqlite3.connect("assignment3.db") 
@@ -62,162 +64,174 @@ class admin_c(user_c):
         cursor.execute("""INSERT INTO ADMIN VALUES('%i','%s', '%s', '%s', '%s', '%s');""" % (id, f, l, title, office, email))
 
         print("Admin Created")
+        
+def main():
+	#marc - addded collums to the student table. 
+	cursor.execute("""ALTER TABLE STUDENT 
+  ADD CRN1 INTEGER NOT NULL, 
+  ADD CRN2 INTEGER NOT NULL, 
+  ADD CRN3 INTEGER NOT NULL, 
+  ADD CRN4 INTEGER NOT NULL, 
+  ADD CRN5 INTEGER NOT NULL;""")
+  
+  
+      courses = {}
+      students = {}
+      instructors = {}
+      admins = {}
 
-courses = {}
-students = {}
-instructors = {}
-admins = {}
-
-choice = 1
-while choice != 0:
-    choice = int(input("\nSelect your choice:\n1: Add Entry\n2: Remove Entry\n3: Update Entry\n4: Search Table\n5: Print Table\n0: Exit Program\n"))
+	
+      choice = 1
+      while choice != 0:
+      #kloe - edited/updated menu
+    choice = int(input("\nSelect your choice:\n1: Add Course to System\n2: Remove Course from System\n3: Update Courses\n4: Search Courses\n5: Print Roster\n6: Remove Course from Semester Schedule\n0: Exit Program\n"))
     selection = 1
-    if choice == 1:
-        selection = int(input("\nWhat table are you adding to?\n1: Course\n2: Student\n3: Instructor\n4: Admin\n0: Back\n"))
+    if choice == 1: #marc added from previous code, kloe updated 
+          selection = int(input("\nEnter the information for the course you want to add:\n"))
         if selection == 1:
-            CRN = int(input("Enter CRN number: "))
-            title = input("Enter Title Name: ")
-            department = input("Enter Department Name: ")
-            time = int(input("Enter Start Time: "))
-            days = input("Enter Days (MTWRF): ")
-            semester = input("Enter Semester: ")
-            year = int(input("Enter Year: "))
-            credits = int(input("Enter Credits: "))
+              CRN = int(input("Enter CRN number: "))
+              title = input("Enter Title Name: ")
+              department = input("Enter Department Name: ")
+              time = int(input("Enter Start Time: "))
+              days = input("Enter Days (MTWRF): ")
+              semester = input("Enter Semester: ")
+              year = int(input("Enter Year: "))
+              credits = int(input("Enter Credits: "))
 
-            courses[CRN] = course_s(CRN, title, department, time, days, semester, year, credits)
-            
-            continue
+              courses[CRN] = course_s(CRN, title, department, time, days, semester, year, credits)
+
+              continue
         elif selection == 2:
-            ID = int(input("Enter ID number: "))
-            firstName = input("Enter First Name: ")
-            lastName = input("Enter Last Name: ")
-            gradYear = int(input("Enter Graduation Year: "))
-            major = input("Enter Major: ")
-            email = input("Enter Email: ")
+              ID = int(input("Enter ID number: "))
+              firstName = input("Enter First Name: ")
+              lastName = input("Enter Last Name: ")
+              gradYear = int(input("Enter Graduation Year: "))
+              major = input("Enter Major: ")
+              email = input("Enter Email: ")
 
-            students[ID] = student_c(firstName, lastName ,ID, gradYear, major, email)
-            continue
+              students[ID] = student_c(firstName, lastName ,ID, gradYear, major, email)
+              continue
         elif selection == 3:
-            ID = int(input("Enter ID number: "))
-            firstName = input("Enter First Name: ")
-            lastName = input("Enter Last Name: ")
-            title = input("Enter Title: ")
-            hireYear = int(input("Enter Hire Year: "))
-            department = input("Enter Department: ")
-            email = input("Enter Email: ")
+              ID = int(input("Enter ID number: "))
+              firstName = input("Enter First Name: ")
+              lastName = input("Enter Last Name: ")
+              title = input("Enter Title: ")
+              hireYear = int(input("Enter Hire Year: "))
+              department = input("Enter Department: ")
+              email = input("Enter Email: ")
 
-            instructors[ID] = instructor_c(firstName, lastName , ID, title, hireYear, department, email)
-            continue
+              instructors[ID] = instructor_c(firstName, lastName , ID, title, hireYear, department, email)
+              continue
         elif selection == 4:
-            ID = int(input("Enter ID number: "))
-            firstName = input("Enter First Name: ")
-            lastName = input("Enter Last Name: ")
-            title = input("Enter Title: ")
-            office = input("Enter Office: ")
-            email = input("Enter Email: ")
+              ID = int(input("Enter ID number: "))
+              firstName = input("Enter First Name: ")
+              lastName = input("Enter Last Name: ")
+              title = input("Enter Title: ")
+              office = input("Enter Office: ")
+              email = input("Enter Email: ")
 
-            instructors[ID] = instructor_c(firstName, lastName, id, title, office, email)
-            continue
+              instructors[ID] = instructor_c(firstName, lastName, id, title, office, email)
+              continue
         elif selection == 0:
-            break        
-    elif choice == 2:
-        selection = int(input("\nWhat table are you deleting from?\n1: Course\n2: Student\n3: Instructor\n4: Admin\n0: Back\n"))
+              break        
+    elif choice == 2: #marc added from previous code, kloe updated 
+        selection = int(input("\nEnter information for the course you want to delete:\n"))
         if selection == 1:
-            CRN = int(input("Enter CRN of course you want to delete: "))
-            cursor.execute("""DELETE FROM COURSES WHERE CRN = '%i';""" % (CRN))
-            continue 
+              CRN = int(input("Enter CRN of course you want to delete: "))
+              cursor.execute("""DELETE FROM COURSES WHERE CRN = '%i';""" % (CRN))
+              continue 
         elif selection == 2:
-            ID = int(input("Enter ID of Student you want to delete: "))
-            cursor.execute("""DELETE FROM STUDENT WHERE ID = '%i';""" % (ID))
-            continue
+              ID = int(input("Enter ID of Student you want to delete: "))
+              cursor.execute("""DELETE FROM STUDENT WHERE ID = '%i';""" % (ID))
+              continue
         elif selection == 3:
-            ID = int(input("Enter ID of Instructor you want to delete: "))
-            cursor.execute("""DELETE FROM INSTRUCTOR WHERE ID = '%i';""" % (ID))
-            continue
+              ID = int(input("Enter ID of Instructor you want to delete: "))
+              cursor.execute("""DELETE FROM INSTRUCTOR WHERE ID = '%i';""" % (ID))
+              continue
         elif selection == 4:
-            ID = int(input("Enter ID of Admin you want to delete: "))
-            cursor.execute("""DELETE FROM ADMIN WHERE ID = '%i';""" % (ID))
-            continue
+              ID = int(input("Enter ID of Admin you want to delete: "))
+              cursor.execute("""DELETE FROM ADMIN WHERE ID = '%i';""" % (ID))
+              continue
         elif selection == 0:
-            break
-    elif choice == 3:
-        cursor.execute("""UPDATE ADMIN SET TITLE = 'Vice-President' WHERE ID = 30002;""")
+              break
+      elif choice == 3:#marc created in addition to courses in course table 
+      		inID = int(input("Enter Student ID"))
+      		CRN1 = int(input("Enter CRN1"))
+            CRN2 = int(input("Enter CRN2"))
+            CRN3 = int(input("Enter CRN3"))
+            CRN4 = int(input("Enter CRN4"))
+            CRN5 = int(input("Enter CRN5"))
+            cursor.execute("""UPDATE STUDENT WHERE ID = '%i' SET CRN1 = '%i', CRN2 = '%i', CRN3 = '%i', CRN4 = '%i', CRN5 = '%i';""" % (inID,CRN1,CRN2,CRN3,CRN4,CRN5)
 
-        cursor.execute("""SELECT COURSES.TITLE, INSTRUCTOR.SURNAME FROM COURSES, INSTRUCTOR WHERE COURSES.DEPARTMENT = INSTRUCTOR.DEPT""")
-        result = cursor.fetchall()
-        for i in result:
-            print(i)
-         
-        continue
-    elif choice == 4:
-        selection = int(input("\nWhat table are you searching from?\n1: Course\n2: Student\n3: Instructor\n4: Admin\n0: Back\n"))
-        if selection == 1:
-            CRN = int(input("Enter CRN of course you want to Search: "))
-            cursor.execute("""SELECT * FROM COURSES WHERE CRN = '%i';""" % (CRN))
-            result = cursor.fetchall()
-            for i in result:
-                print(i)
-            continue 
-        elif selection == 2:
-            ID = int(input("Enter ID of Student you want to Search: "))
-            cursor.execute("""SELECT * FROM STUDENT WHERE ID = '%i';""" % (ID))
-            result = cursor.fetchall()
-            for i in result:
-                print(i)
-            continue
-        elif selection == 3:
-            ID = int(input("Enter ID of Instructor you want to Search: "))
-            cursor.execute("""SELECT * FROM INSTRUCTOR WHERE ID = '%i';""" % (ID))
-            result = cursor.fetchall()
-            for i in result:
-                print(i)
-            continue
-        elif selection == 4:
-            ID = int(input("Enter ID of Admin you want to Search: "))
-            cursor.execute("""SELECT * FROM ADMIN WHERE ID = '%i';""" % (ID))
-            result = cursor.fetchall()
-            for i in result:
-                print(i)
-            continue
-        elif selection == 0:
-            break
-        break
-    elif choice == 5:
-        selection = int(input("\nWhat table do you want printed?\n1: Course\n2: Student\n3: Instructor\n4: Admin\n0: Back\n"))
-        if selection == 1:
-            cursor.execute("""SELECT * FROM COURSES""")
-            query_result = cursor.fetchall()
-            
-            for i in query_result:
-                print(i)
-            continue 
-        elif selection == 2:
-            cursor.execute("""SELECT * FROM STUDENT""")
-            query_result = cursor.fetchall()
-            
-            for i in query_result:
-                print(i)
-            continue
-        elif selection == 3:
-            cursor.execute("""SELECT * FROM INSTRUCTOR""")
-            query_result = cursor.fetchall()
-            
-            for i in query_result:
-                print(i)
-            continue
-        elif selection == 4:
-            cursor.execute("""SELECT * FROM ADMIN""")
-            query_result = cursor.fetchall()
-            
-            for i in query_result:
-                print(i)
-            continue
-        elif selection == 0:
-            break
-        break
-    elif choice == 0:
-        print("Exit Program")
-        break
+      elif choice == 4: #kloe added search by parameters
+          selection = int(input("\nHow would you like to search?\n1: By CRN\n2: By CRN and Department\n"))
+          if selection == 1:
+              CRN = int(input("Enter CRN of course you want to Search: "))
+              cursor.execute("""SELECT * FROM COURSES WHERE CRN = '%i';""" % (CRN))
+              result = cursor.fetchall()
+              for i in result:
+                  print(i)
+              continue 
+          if selection == 2:
+              CRN = int(input("Enter CRN and Department of course you want to Search: "))
+              cursor.execute("""SELECT * FROM COURSES WHERE CRN = '%i' AND DEPARTMENT = '%s';""" % (CRN, DEPARTMENT))
+              result = cursor.fetchall()
+              for i in result:
+                  print(i)
+              continue 
+              
+          elif selection == 0:
+              break
+          break
+      elif choice == 5: #kloe added print roster function 
+          selection = int(input("\nWhich roster would you like to print?\n"))
+          if selection == 1:
+          	  CRNin = int(input("Enter CRN of course roster you would like to print: "))
+              cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN1 = '%i' OR CRN2 = '%i' OR CRN3 = 'i' OR CRN4 = '%i' OR CRN5 = '%i'; """ % (CRNin,CRNin,CRNin,CRNin,CRNin))
+              query_result = cursor.fetchall()
+
+              for i in query_result:
+                  print(i)
+              continue 
+          elif selection == 2:
+              cursor.execute("""SELECT * FROM STUDENT""")
+              query_result = cursor.fetchall()
+
+              for i in query_result:
+                  print(i)
+              continue
+          elif selection == 3:
+              cursor.execute("""SELECT * FROM INSTRUCTOR""")
+              query_result = cursor.fetchall()
+
+              for i in query_result:
+                  print(i)
+              continue
+          elif selection == 4:
+              cursor.execute("""SELECT * FROM ADMIN""")
+              query_result = cursor.fetchall()
+
+              for i in query_result:
+                  print(i)
+              continue
+          elif selection == 0:
+              break
+          break
+      elif choice == 0:
+          print("Exit Program")
+          break
+          
+          #kloe and marc created new choice
+      elif choice == 6:
+          selection = int(input("\nWhich course would you like to remove?\n"))
+          if selection == 1:
+              CRNin = int(input("Enter CRN number: "))
+              cursor.execute("""UPDATE COURSES SET SEMESTER = "Null" WHERE CRN = '%i'; """ % (CRNin))
+            	
+
+          
+if __name__=="__main__":
+main()
 
 database.commit() 
   

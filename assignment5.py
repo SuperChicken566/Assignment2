@@ -150,9 +150,25 @@ def main():
             elif selection == 0:
                 break
             break
-        elif choice == 5: #kloe added print roster function 
+        elif choice == 5: #kloe & marc added print roster function 
             CRNin = int(input("Enter CRN of course roster you would like to print: "))
             cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN1 = '%i' ; """ % (CRNin))
+            query_result = cursor.fetchall()
+            for i in query_result:
+                print(i)
+            cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN2 = '%i' ; """ % (CRNin))
+            query_result = cursor.fetchall()
+            for i in query_result:
+                print(i)
+            cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN3 = '%i' ; """ % (CRNin))
+            query_result = cursor.fetchall()
+            for i in query_result:
+                print(i)
+            cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN4 = '%i' ; """ % (CRNin))
+            query_result = cursor.fetchall()
+            for i in query_result:
+                print(i)
+            cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN5 = '%i' ; """ % (CRNin))
             query_result = cursor.fetchall()
             for i in query_result:
                 print(i)
