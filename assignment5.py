@@ -102,25 +102,21 @@ def main():
         choice = int(input("\nSelect your choice:\n1: Add Course to System\n2: Remove Course from System\n3: Update Courses\n4: Search Courses\n5: Print Roster\n0: Exit Program\n"))
         selection = 1
         if choice == 1: #marc added from previous code, kloe updated 
-            selection = int(input("\nPress 1 to enter the information for the course you want to add:\n"))
-            if selection == 1:
-                CRN = int(input("Enter CRN number: "))
-                title = input("Enter Title Name: ")
-                department = input("Enter Department Name: ")
-                time = int(input("Enter Start Time: "))
-                days = input("Enter Days (MTWRF): ")
-                semester = input("Enter Semester: ")
-                year = int(input("Enter Year: "))
-                credits = int(input("Enter Credits: "))
+            CRN = int(input("Enter CRN number: "))
+            title = input("Enter Title Name: ")
+            department = input("Enter Department Name: ")
+            time = int(input("Enter Start Time: "))
+            days = input("Enter Days (MTWRF): ")
+            semester = input("Enter Semester: ")
+            year = int(input("Enter Year: "))
+            credits = int(input("Enter Credits: "))
 
-                courses[CRN] = course_s(CRN, title, department, time, days, semester, year, credits)
+            courses[CRN] = course_s(CRN, title, department, time, days, semester, year, credits)
 
         elif choice == 2: #marc added from previous code, kloe updated 
-            selection = int(input("\nPress 1 to enter information for the course you want to delete:\n"))
-            if selection == 1:
-                CRN = int(input("Enter CRN of course you want to delete: "))
-                cursor.execute("""DELETE FROM COURSES WHERE CRN = '%i';""" % (CRN))
-                break
+            CRN = int(input("Enter CRN of course you want to delete: "))
+            cursor.execute("""DELETE FROM COURSES WHERE CRN = '%i';""" % (CRN))
+            break
         elif choice == 3:#marc created in addition to courses in course table 
             inID = int(input("Enter Student ID: "))
             CRN1 = int(input("Enter CRN1: "))
