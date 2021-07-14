@@ -1,0 +1,11 @@
+Are you logging in as a student, instuctor, or admin?
+Please enter an email: Please enter your ID number: login valid
+
+Select your choice:
+1: Add Course to System
+2: Remove Course from System
+3: Update Courses
+4: Search Courses
+5: Print Roster
+0: Exit Program
+Exit Program
