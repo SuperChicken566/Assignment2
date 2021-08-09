@@ -1,8 +1,7 @@
-#code based off of marc's code for assignment 3. Kloe did most of the function editing and Marc did most of the database manipulation. changes will be marked individually below. 
-import unittest
+
 import sqlite3
 
-database = sqlite3.connect("assignment6.db") 
+database = sqlite3.connect("final.db") 
 
 cursor = database.cursor() 
 
@@ -77,31 +76,34 @@ def main():
     students = {}
     instructors = {}
     admins = {}
-    #collective contributions from marc and kloe
-    inputUser = input("Are you logging in as a student, instuctor, or admin?\n")
     while True:
-        inputEmail = input("Please enter an email: ")
-        cursor.execute("""SELECT * FROM '%s' WHERE EMAIL = '%s';""" % (inputUser, inputEmail))
-        result = cursor.fetchall()
-        if len(result) == 0:
-            print("Email doesn't exist")
-            continue
-        cursor.execute("""SELECT ID FROM '%s' WHERE EMAIL = '%s';""" % (inputUser, inputEmail))
-        result = [int(record[0]) for record in cursor.fetchall()]
-        inputPass = int(input("Please enter your ID number: "))
-        if result[0] == inputPass:
-            print("login valid")
-            break
-        elif result[0] != inputPass:
-            print("login invalid")
-            continue
-    
+        inputUser = input("Are you logging in as a STUDENT, INSTRUCTOR, or ADMIN?\n")
+        if inputUser in ["STUDENT", "INSTRUCTOR", "ADMIN"]:
+            inputEmail = input("Please enter an email: ")
+            cursor.execute("""SELECT * FROM '%s' WHERE EMAIL = '%s';""" % (inputUser, inputEmail))
+            result = cursor.fetchall()
+            if len(result) == 0:
+                print("Email doesn't exist")
+                continue
+            cursor.execute("""SELECT ID FROM '%s' WHERE EMAIL = '%s';""" % (inputUser, inputEmail))
+            result = [int(record[0]) for record in cursor.fetchall()]
+            inputPass = int(input("Please enter your ID number: "))
+            if result[0] == inputPass:
+                print("login valid")
+                break
+            elif result[0] != inputPass:
+                print("login invalid")
+                continue
+        else:
+            print("Invalid user. Please retry with a valid user type.")
+
+
     choice = 1
     while choice != 0:
-    #kloe - edited/updated menu
+  
         choice = int(input("\nSelect your choice:\n1: Add Course to System\n2: Remove Course from System\n3: Update Courses\n4: Search Courses\n5: Print Roster\n0: Exit Program\n"))
         selection = 1
-        if choice == 1: #marc added from previous code, kloe updated 
+        if choice == 1: 
             selection = int(input("\nPress 1 to enter the information for the course you want to add:\n"))
             if selection == 1:
                 CRN = int(input("Enter CRN number: "))
@@ -115,13 +117,13 @@ def main():
 
                 courses[CRN] = course_s(CRN, title, department, time, days, semester, year, credits)
 
-        elif choice == 2: #marc added from previous code, kloe updated 
+        elif choice == 2: 
             selection = int(input("\nPress 1 to enter information for the course you want to delete:\n"))
             if selection == 1:
                 CRN = int(input("Enter CRN of course you want to delete: "))
                 cursor.execute("""DELETE FROM COURSES WHERE CRN = '%i';""" % (CRN))
                 break
-        elif choice == 3:#marc created in addition to courses in course table 
+        elif choice == 3:
             inID = int(input("Enter Student ID: "))
             CRN1 = int(input("Enter CRN1: "))
             CRN2 = int(input("Enter CRN2: "))
@@ -130,7 +132,7 @@ def main():
             CRN5 = int(input("Enter CRN5: "))
             cursor.execute("""UPDATE STUDENT SET CRN1 = '%i', CRN2 = '%i', CRN3 = '%i', CRN4 = '%i', CRN5 = '%i' WHERE ID = '%i';""" % (CRN1,CRN2,CRN3,CRN4,CRN5,inID))
 
-        elif choice == 4: #kloe added search by parameters
+        elif choice == 4: 
             selection = int(input("\nHow would you like to search?\n1: By CRN\n2: By CRN and Department\n"))
             if selection == 1:
                 CRN = int(input("Enter CRN of course you want to Search: "))
@@ -150,7 +152,7 @@ def main():
             elif selection == 0:
                 break
             break
-        elif choice == 5: #kloe & marc added print roster function 
+        elif choice == 5: 
             CRNin = int(input("Enter CRN of course roster you would like to print: "))
             cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN1 = '%i' ; """ % (CRNin))
             query_result = cursor.fetchall()
