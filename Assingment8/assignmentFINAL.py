@@ -2,7 +2,7 @@
 import unittest
 import sqlite3
 
-database = sqlite3.connect("final.db") 
+database = sqlite3.connect("assignment6.db") 
 
 cursor = database.cursor() 
 
