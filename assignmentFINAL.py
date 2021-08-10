@@ -42,8 +42,13 @@ class student_c(user_c):
         self.gradYear = year
         self.major = major
         cursor.execute("""INSERT INTO STUDENT VALUES('%i','%s', '%s', '%i', '%s', '%s');""" % (id, f, l, year, major, email))
-  
+    
         print("Student Created")
+    def studentselection():
+        choice = int(input("\nSelect your choice:\n1: Register for Course\n2: Drop Course\n3: Print Schedule\n0: Exit Program\n"))
+        print(choice)
+
+    
 
 class instructor_c(user_c):
     def __init__(self, f, l, id, title, year, department, email):
@@ -65,12 +70,6 @@ class admin_c(user_c):
         print("Admin Created")
         
 def main():
-    #marc - addded collums to the student table. not needed after running once
-    #cursor.execute("""ALTER TABLE STUDENT ADD CRN1 INTEGER NULL;""")
-    #cursor.execute("""ALTER TABLE STUDENT ADD CRN2 INTEGER NULL;""")
-    #cursor.execute("""ALTER TABLE STUDENT ADD CRN3 INTEGER NULL;""")
-    #cursor.execute("""ALTER TABLE STUDENT ADD CRN4 INTEGER NULL;""")
-    #cursor.execute("""ALTER TABLE STUDENT ADD CRN5 INTEGER NULL;""")
 
     courses = {}
     students = {}
@@ -100,8 +99,10 @@ def main():
 
     choice = 1
     while choice != 0:
-  
-        choice = int(input("\nSelect your choice:\n1: Add Course to System\n2: Remove Course from System\n3: Update Courses\n4: Search Courses\n5: Print Roster\n0: Exit Program\n"))
+        
+        if inputUser == "STUDENT":
+            studentselection()
+            choice = int(input("\nSelect your choice:\n1: Add Course to System\n2: Remove Course from System\n3: Search Courses\n4: Print Schedule\n0: Exit Program\n"))
         selection = 1
         if choice == 1: 
             selection = int(input("\nPress 1 to enter the information for the course you want to add:\n"))
@@ -123,16 +124,8 @@ def main():
                 CRN = int(input("Enter CRN of course you want to delete: "))
                 cursor.execute("""DELETE FROM COURSES WHERE CRN = '%i';""" % (CRN))
                 break
-        elif choice == 3:
-            inID = int(input("Enter Student ID: "))
-            CRN1 = int(input("Enter CRN1: "))
-            CRN2 = int(input("Enter CRN2: "))
-            CRN3 = int(input("Enter CRN3: "))
-            CRN4 = int(input("Enter CRN4: "))
-            CRN5 = int(input("Enter CRN5: "))
-            cursor.execute("""UPDATE STUDENT SET CRN1 = '%i', CRN2 = '%i', CRN3 = '%i', CRN4 = '%i', CRN5 = '%i' WHERE ID = '%i';""" % (CRN1,CRN2,CRN3,CRN4,CRN5,inID))
 
-        elif choice == 4: 
+        elif choice == 3: 
             selection = int(input("\nHow would you like to search?\n1: By CRN\n2: By CRN and Department\n"))
             if selection == 1:
                 CRN = int(input("Enter CRN of course you want to Search: "))
@@ -152,7 +145,7 @@ def main():
             elif selection == 0:
                 break
             break
-        elif choice == 5: 
+        elif choice == 4: 
             CRNin = int(input("Enter CRN of course roster you would like to print: "))
             cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN1 = '%i' ; """ % (CRNin))
             query_result = cursor.fetchall()
@@ -178,6 +171,11 @@ def main():
         elif choice == 0:
             print("Exit Program")
             break
+        if inputUser in ["INSTRUCTOR"]:
+            choice = int(input("\nSelect your choice:\n1: Print Course Teaching Schedule\n2: Search Course Roster\n3: Print Course Roster\n4: Search Courses\n0: Exit Program\n"))
+
+
+
 
 if __name__=="__main__":
     main()
