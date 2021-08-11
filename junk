@@ -1,0 +1,68 @@
+selection = 1
+        if choice == 1: 
+            selection = int(input("\nPress 1 to enter the information for the course you want to add:\n"))
+            if selection == 1:
+                CRN = int(input("Enter CRN number: "))
+                title = input("Enter Title Name: ")
+                department = input("Enter Department Name: ")
+                time = int(input("Enter Start Time: "))
+                days = input("Enter Days (MTWRF): ")
+                semester = input("Enter Semester: ")
+                year = int(input("Enter Year: "))
+                credits = int(input("Enter Credits: "))
+
+                courses[CRN] = course_s(CRN, title, department, time, days, semester, year, credits)
+
+        elif choice == 2: 
+            selection = int(input("\nPress 1 to enter information for the course you want to delete:\n"))
+            if selection == 1:
+                CRN = int(input("Enter CRN of course you want to delete: "))
+                cursor.execute("""DELETE FROM COURSES WHERE CRN = '%i';""" % (CRN))
+                break
+
+        elif choice == 3: 
+            selection = int(input("\nHow would you like to search?\n1: By CRN\n2: By CRN and Department\n"))
+            if selection == 1:
+                CRN = int(input("Enter CRN of course you want to Search: "))
+                cursor.execute("""SELECT * FROM COURSES WHERE CRN = '%i';""" % (CRN))
+                result = cursor.fetchall()
+                for i in result:
+                    print(i)
+                continue 
+            if selection == 2:
+                CRN = int(input("Enter CRN course you want to Search: "))
+                department = input("Enter Department for course you want to search: ")
+                cursor.execute("""SELECT * FROM COURSES WHERE CRN = '%i' AND DEPARTMENT = '%s';""" % (CRN, department))
+                result = cursor.fetchall()
+                for i in result:
+                    print(i)
+                continue 
+            elif selection == 0:
+                break
+            break
+        elif choice == 4: 
+            CRNin = int(input("Enter CRN of course roster you would like to print: "))
+            cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN1 = '%i' ; """ % (CRNin))
+            query_result = cursor.fetchall()
+            for i in query_result:
+                print(i)
+            cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN2 = '%i' ; """ % (CRNin))
+            query_result = cursor.fetchall()
+            for i in query_result:
+                print(i)
+            cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN3 = '%i' ; """ % (CRNin))
+            query_result = cursor.fetchall()
+            for i in query_result:
+                print(i)
+            cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN4 = '%i' ; """ % (CRNin))
+            query_result = cursor.fetchall()
+            for i in query_result:
+                print(i)
+            cursor.execute("""SELECT NAME, SURNAME FROM STUDENT WHERE CRN5 = '%i' ; """ % (CRNin))
+            query_result = cursor.fetchall()
+            for i in query_result:
+                print(i)
+
+        elif choice == 0:
+            print("Exit Program")
+            break
