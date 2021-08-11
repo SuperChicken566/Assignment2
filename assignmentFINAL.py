@@ -1,3 +1,4 @@
+from os import name
 import sqlite3
 from sqlite3.dbapi2 import Cursor
 
@@ -27,7 +28,8 @@ class course_s():
         self.semester = semester
         self.year = year
         self.credits = credits
-        cursor.execute("""INSERT INTO COURSES VALUES('%i','%s', '%s', '%i', '%s', '%s', '%i','%i');""" % (crn, title, department, time, days, semester, year, credits))
+        SQLstring = "INSERT INTO COURSES VALUES('" + str(crn)+ "','" + str(title) + "', '" + str(department) + "', '" + str(time) + "', '" + str(days) + "', '" + str(semester) + "', '"+ str(year) + "','" + str(credits) + "');"
+        cursor.execute(SQLstring)
         
 class user_c():
     def __init__(self, f, l, id, email):
@@ -41,7 +43,8 @@ class student_c(user_c):
         super().__init__(f,l,id, email)
         self.gradYear = year
         self.major = major
-        cursor.execute("""INSERT INTO STUDENT VALUES('%i','%s', '%s', '%i', '%s', '%s', 0, 0, 0, 0, 0);""" % (id, f, l, year, major, email))
+        SQLstring = "INSERT INTO STUDENT VALUES('" + str(id)+ "','" + str(f) + "', '" + str(l) + "', '" + str(year) + "', '" + str(major) + "', '" + str(email) + "', 0, 0, 0, 0, 0);"
+        cursor.execute(SQLstring)
     
         print("Student Created")
 
@@ -51,7 +54,8 @@ class instructor_c(user_c):
         self.title = title
         self.hireYear = year
         self.dept = department
-        cursor.execute("""INSERT INTO INSTRUCTOR VALUES('%i','%s', '%s', '%i', '%s', '%s', 0, 0, 0);""" % (id, f, l, title, year, department, email))
+        SQLstring = "INSERT INTO INSTRUCTOR VALUES('" + str(id)+ "','" + str(f) + "', '" + str(l) + "', '" + str(title) + "', '" + str(year) + "', '" + str(department) + "', '" + str(email) + "', 0, 0, 0);"
+        cursor.execute(SQLstring)
 
         print("Instructor Created")
 
@@ -224,26 +228,26 @@ def main():
                     inputSemester = input("Enter Semester(Fall,Spring,Summer): ")
                     inputYear = int(input("Enter year: "))
                     inputCredits = int(input("Enter # of Credits: "))
-                    courses[inputCRN] = (inputCRN, inputTitle, inputDEPT, inputTime, inputDays, inputSemester, inputYear, inputCredits)
+                    courses[inputCRN] = course_s(inputCRN, inputTitle, inputDEPT, inputTime, inputDays, inputSemester, inputYear, inputCredits)
 
                 elif choice == 2:
                     CRN = int(input("Enter CRN of course you want to delete: "))
                     cursor.execute("""DELETE FROM COURSES WHERE CRN = '%i';""" % (CRN))
                 
                 elif choice == 3:
-                    selection = int(input("1: Add Student\n2: Add Instructor\n0: Exit\n "))
-                    inputID = input("Enter ID: ")
+                    selection = int(input("1: Add Student\n2: Add Instructor\n0: Exit\n"))
+                    inputID = int(input("Enter ID: "))
                     inputName = input("Enter Name: ")
                     inputSurname = input("Enter Surname: ")
                     inputEmail = input("Enter Email: ")
                     inputMaj = input("Enter Department: ")
                     if selection == 1:
                         inputGrad = int(input("Enter Graduation Year: "))
-                        students[inputID] = (inputID, inputName, inputSurname, inputGrad, inputMaj, inputEmail)
+                        students[inputID] = student_c(inputName, inputSurname, inputID, inputGrad, inputMaj, inputEmail)
                     elif selection == 2:
                         inputTitle = input("Enter Title: ")
-                        inputYear = input("Enter Hire Year: ")
-                        instructors[inputID] = (inputID, inputName, inputSurname, inputTitle, inputYear, inputDEPT, inputEmail)
+                        inputYear = int(input("Enter Hire Year: "))
+                        instructors[inputID] = instructor_c(inputID, inputName, inputSurname, inputTitle, inputYear, inputMaj, inputEmail)
 
                 elif choice == 4:
                     selection = int(input("1: Link Course To Student\n2: Link Course to Instructor\nEnter Selection: "))
@@ -273,7 +277,7 @@ def main():
                                 continue
                             else: 
                                 print("Empty course slot found; Schedule Updated")
-                                SQLstring =  "UPDATE STUDENT SET CRN" + str(x) + " = " + str(inputCRN) + " WHERE ID =" + str(inputID)
+                                SQLstring =  "UPDATE INSTRUCTOR SET CRN" + str(x) + " = " + str(inputCRN) + " WHERE ID =" + str(inputID)
                                 cursor.execute(SQLstring)
                                 break
                 elif choice == 5:
